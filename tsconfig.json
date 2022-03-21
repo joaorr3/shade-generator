@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "lib": ["ESNext"],
+    "module": "ESNext",
+    "target": "ESNext",
+
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "strict": true,
+
+    "outDir": "./dist",
+    "declaration": true
+  },
+  "include": ["./*"],
+  "exclude": ["node_modules"]
+}

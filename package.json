@@ -1,0 +1,29 @@
+{
+  "name": "shade-generator",
+  "version": "1.0.0",
+  "description": "Generate tints and shades easily.",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joaorr3/shade-generator.git"
+  },
+  "keywords": [
+    "color",
+    "shades",
+    "tints",
+    "generator"
+  ],
+  "author": "João Ribeiro",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/joaorr3/shade-generator/issues"
+  },
+  "homepage": "https://github.com/joaorr3/shade-generator#readme",
+  "devDependencies": {
+    "typescript": "^4.6.2"
+  }
+}
