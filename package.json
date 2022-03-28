@@ -1,6 +1,6 @@
 {
   "name": "shade-generator",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Generate tints and shades easily.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -26,5 +26,8 @@
   "homepage": "https://github.com/joaorr3/shade-generator#readme",
   "devDependencies": {
     "typescript": "^4.6.2"
-  }
+  },
+  "files": [
+    "dist/*"
+  ]
 }

@@ -54,20 +54,23 @@ export const hexToRgba = (hexColor: string) => {
   return rgba;
 };
 
+export const parseDecAlpha = (decAlpha: number) =>
+  decAlpha > 1 ? 1 : decAlpha < 0 ? 0 : decAlpha;
+
+export const decToHex = (val: number, isAlpha = false) => {
+  const v = isAlpha ? parseDecAlpha(val) * 255 : val;
+  var value = Math.round(clamp(v, 0, 255));
+  var hex = value.toString(16);
+  return hex.length === 1 ? `0${hex}` : hex;
+};
+
 export const rgbaToHex = (rgba: Rgba, hash?: boolean, withAlpha = false) => {
   const { r, g, b, a } = rgba;
-
-  const decToHex = (val: number) => {
-    var value = Math.round(clamp(val, 0, 255));
-    var hex = value.toString(16);
-
-    return hex.length === 1 ? `0${hex}` : hex;
-  };
 
   const hexR = decToHex(r);
   const hexG = decToHex(g);
   const hexB = decToHex(b);
-  const hexA = a ? decToHex(a * 255) : "";
+  const hexA = a ? decToHex(a, true) : "";
 
   const hexColor = withAlpha
     ? `${hexR}${hexG}${hexB}${hexA}`
@@ -260,18 +263,8 @@ const ShadeGenerator: IShadeGenerator = {
 
     if (isHex && color) {
       this.baseColor = hexToRgba(color);
-    } else if (color) {
-      const pattern = /\d+/g;
-      const match = color?.match(pattern);
-      if (match) {
-        const [r, g, b, a] = match;
-        this.baseColor = {
-          r: +r,
-          g: +g,
-          b: +b,
-          a: +a,
-        };
-      }
+    } else {
+      throw new Error(`The color: ${color}  you provided is not valid`);
     }
 
     this.generateShades();
@@ -288,11 +281,9 @@ const ShadeGenerator: IShadeGenerator = {
       [Shade, ShadeOption]
     >;
     return shadeEntries.reduce(
-      (prev, [shade, option]): Record<Shade, string> => {
-        return {
-          ...prev,
-          [shade]: this[colorFormat](option.value),
-        };
+      (acc, [shade, option]): Record<Shade, string> => {
+        acc[shade] = this[colorFormat](option.value);
+        return acc;
       },
       {} as Record<Shade, string>
     );
@@ -327,7 +318,7 @@ const ShadeGenerator: IShadeGenerator = {
     }
   },
   opacity(amount) {
-    const opacity = amount > 1 ? 1 : amount < 0 ? 0 : amount;
+    const opacity = parseDecAlpha(amount);
 
     const shadeValue = this.shades[this.currentShade].value;
 
