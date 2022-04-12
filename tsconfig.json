@@ -3,7 +3,7 @@
     "baseUrl": "./",
     "lib": ["ESNext"],
     "module": "ESNext",
-    "target": "ESNext",
+    "target": "ES6",
 
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
