@@ -6,7 +6,8 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "test": "echo \"No test specified\""
+    "test": "echo \"No test specified\"",
+    "type-check": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
